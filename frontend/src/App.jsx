@@ -44,7 +44,7 @@ function App() {
     if (!isDragging) return;
 
     const dx = event.touches[0].clientX - startX;
-    const rotationY = currentRotation + dx * 0.5; // Adjust rotation speed as needed
+    const rotationY = currentRotation + dx * 0.05; // Adjust rotation speed as needed
     satellitesRef.current.style.transform = `rotateY(${rotationY}deg)`;
   };
 
