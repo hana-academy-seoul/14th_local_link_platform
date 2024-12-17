@@ -1,3 +1,16 @@
+@import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css');
+/* index.css 또는 App.css에 추가 */
+/* @import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css"; */
+
 body {
     margin: 0;
+    font-family: 'SUIT', sans-serif;
+}
+
+#root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1D8352;
 }
