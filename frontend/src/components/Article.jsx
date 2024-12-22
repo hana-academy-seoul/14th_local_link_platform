@@ -6,42 +6,47 @@ import { ArticleModal } from './ArticleModal';
 const PaperContainer = styled.div`
   padding: 16px;
   margin: 16px 0;
+  padding: 30px;
 `;
 
 const Title = styled.h2`
-  font-size: 1.5em;
+  font-size: 2.5vh;
+
   margin: 0;
   color: #FFFFFF;
 `;
 
 const Authors = styled.p`
-  font-size: 1em;
+  font-size: 2.0vh;
   margin: 8px 0 4px;
   color: #FFFFFF;
 `;
 
 const Affiliation = styled.p`
-  font-size: 0.9em;
+  font-size: 2.0vh;
   margin: 4px 0;
   color: #FFFFFF;
 `;
 
 const Keywords = styled.p`
-  font-size: 0.9em;
+  font-size: 2.0em;
   margin: 4px 0;
   color: #FFFFFF;
 `;
 
 const Button = styled.button`
+  width: 30vw;
+  height: 4vh;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 50px;
   background-color: #FFFFFF;
   border: 1px solid #FFFFFF;
   color: #000000;
-  font-size: 1em;
+  font-size: 2vh;
   cursor: pointer;
   margin-top: 0;
   transition: background-color 0.3s;
@@ -52,7 +57,7 @@ const Button = styled.button`
 `;
 
 const HeartIcon = styled(FaHeart)`
-  font-size: 24px;
+  font-size: 60px;
   margin-left: 8px;
   color: ${(props) => (props.isLike ? '#FF0000' : 'transparent')};
   stroke: #FFFFFF;
@@ -73,14 +78,14 @@ export const Article = ({ title, authors, affiliation, keywords, id, isLike, abs
       <Authors>{`저자: ${authors.join(', ')}`}</Authors>
       <Affiliation>{`소속: ${affiliation}`}</Affiliation>
       <Keywords>{`키워드: ${keywords.join(', ')}`}</Keywords>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '10px'}}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '30px'}}>
         <Button onClick={handleModalOpen}>
           자세히 보기
           <FaArrowRight />
         </Button>
         <HeartIcon isLike={isLike} />
       </div>
-      <hr style={{color: '#FFFFFF' }}/>
+      <hr style={{color: '#FFFFFF', marginTop:'70px', border: 'white solid 2px'}}/>
 
       {isModalOpen && <ArticleModal title={title} abstract={abstract} onClose={handleModalClose} />}
     </PaperContainer>

@@ -44,8 +44,8 @@ function App() {
       style={{
         overflow: "hidden",
         position: "relative",
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        height: "100%",
         backgroundColor: "#fff",
       }}
       onTouchStart={handleTouchStart}

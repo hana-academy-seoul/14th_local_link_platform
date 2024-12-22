@@ -12,7 +12,7 @@ const NavbarContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   background-color: #fff;
-  height: 70px;
+  height: 8vh;
   border-radius: 35px 35px 0 0; /* 둥근 형태 */
   box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
   z-index: 10;
@@ -27,14 +27,14 @@ const NavItem = styled.div`
   padding: 10px;
 
   & svg {
-    font-size: 24px;
+    font-size: 65px;
     color: ${(props) => (props.isActive ? "#1D8352" : "#aaa")};
     transition: color 0.3s;
   }
 
   & span {
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 30px;
     color: ${(props) => (props.isActive ? "#1D8352" : "#aaa")};
   }
 

@@ -17,7 +17,7 @@ const moveLeft = keyframes`
 // 애니메이션을 적용한 컨테이너
 const Arrow = styled.div`
   display: inline-block;
-  font-size: 2rem;
+  font-size: 4vh;
   color: #555;
   animation: ${moveLeft} 2s infinite; /* 애니메이션 설정 */
   position: relative;

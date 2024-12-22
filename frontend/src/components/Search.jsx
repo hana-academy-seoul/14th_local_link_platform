@@ -7,18 +7,21 @@ const Searchwrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
+    height: 5vh;
     margin-top: 15px;
+    padding-top: 30px;
 `;
 
 const SearchContainer = styled.div`
     display: flex;
+    height: 80%;
     align-items: center;
-    border-radius: 25px;
+    border-radius: 60px;
     border: 1px solid #ccc;
     padding: 5px 10px;
-    width: 300px;
-    margin-left: 10px;
+    padding-right: 20px;
+    width: 70%;
+    margin-left: 30px;
     background-color: #fff;
 `;
 
@@ -28,11 +31,13 @@ const SearchInput = styled.input`
     flex: 1;
     border-radius: 25px;
     padding: 5px 10px;
+    font-size: 1.8vh;
 `;
 
 const SearchIcon = styled(FaSearch)`
     color: #ccc;
     margin-left: 10px;
+    font-size: 2vh;
 `;
 
 const AccountIcon = styled(FaUser)`
@@ -40,7 +45,7 @@ const AccountIcon = styled(FaUser)`
     background-color: #ccc;
     border-radius: 50%;
     padding: 8px;
-    font-size: 18px;
+    font-size: 80px;
 `;
 
 export const SearchBar = () => {
