@@ -41,8 +41,3 @@ def outputInfo():
                         }
                     info[i].append(tempD)
     return info
-
-
-def video(file_path):
-    with open(file_path, "rb") as v:
-        yield from v
