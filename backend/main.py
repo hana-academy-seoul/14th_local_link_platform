@@ -6,11 +6,11 @@ import requests
 from functions import *
 
 
-class Search(BaseModel):
+class Search1(BaseModel):
     data: str
 
 
-class SearchInfo(BaseModel):
+class Search2(BaseModel):
     data1: str
     data2: str
 
@@ -22,7 +22,7 @@ meV = {'ME5890': '',
 
 
 @app.get('/paperList')
-async def paper_list(search: Search):
+async def paper_list(search: Search1):
     retL = list()
     if search.data == 'AC': retL = outputTitle()[0]
     elif search.data == 'ME': retL = outputTitle()[1]
@@ -30,8 +30,15 @@ async def paper_list(search: Search):
     return retL
 
 
+@app.get('/paperListAll')
+async def paper_list_all():
+    retL = list()
+    retL.append(outputTitle()[0]); retL.append(outputTitle()[1]); retL.append(outputTitle()[2])
+    return retL
+
+
 @app.get('/paperInfo')
-async def paper_info(search: SearchInfo):
+async def paper_info(search: Search2):
     retL = list()
     index = 3
     data1 = search.data1
@@ -40,7 +47,6 @@ async def paper_info(search: SearchInfo):
     elif data1 == 'ME': index = 1
     elif data1 == 'DE': index = 2
     if index < 3:
-        # tempS = search.data2.split(' ')
         info = outputInfo()[index]
         for paper in info:
             if (data2 in paper['titleK'] or data2 in paper['titleE'] or
@@ -49,8 +55,21 @@ async def paper_info(search: SearchInfo):
     return retL
 
 
+@app.get('/paperInfoAll')
+async def paper_info_all(search: Search1):
+    retL = list()
+    data = search.data
+    info = list()
+    info.append(outputInfo()[0]); info.append(outputInfo()[1]); info.append(outputInfo()[2])
+    for paper in info:
+        if (data in paper['titleK'] or data in paper['titleE'] or
+            data in paper['author'] or data in paper['abstract'] or data in paper['id']):
+            retL.append(paper)
+    return retL
+
+
 @app.post('/stream')
-async def stream(search: Search):
+async def stream(search: Search1):
     info = outputInfo()[1]
     data = search.data
     videoID = False
