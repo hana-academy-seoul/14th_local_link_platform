@@ -87,7 +87,7 @@ export const Article = ({ title, authors, affiliation, keywords, id, isLike, abs
       </div>
       <hr style={{color: '#FFFFFF', marginTop:'70px', border: 'white solid 2px'}}/>
 
-      {isModalOpen && <ArticleModal title={title} abstract={abstract} onClose={handleModalClose} />}
+      {isModalOpen && <ArticleModal title={title} authors={authors} keywords={keywords} abstract={abstract} onClose={handleModalClose} />}
     </PaperContainer>
   );
 };

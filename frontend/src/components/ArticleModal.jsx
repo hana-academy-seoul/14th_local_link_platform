@@ -27,17 +27,14 @@ const ModalContent = styled.div`
   background: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  max-width: 500px;
-  max-height: 80%;
-  overflow-y: auto;
   width: 90%;
+  height: 70%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 10px;
 `;
 
 const TextWrapper = styled.div`
-    overflow-y: auto;
-    max-height: 500px;
+  height: 90%;
 `
 
 const ArticleButton = styled.button`
@@ -45,11 +42,11 @@ const ArticleButton = styled.button`
   color: white;
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 0.9em;
-  margin-top: 10px;
-
+  font-size: 1.5vh;
+  width: 30%;
+  margin-bottom: 20px;
   &:hover {
     background: #1DB522;
   }
@@ -57,30 +54,57 @@ const ArticleButton = styled.button`
 
 const CloseButton = styled.button`
   position: relative;
-  left: 95%;
-  top: -10px;
+  left: 93%;
+  bottom: 10px;
   background: transparent;
   color: #000000;
   border: none;
-  font-size: 1.5em;
+  font-size: 3vh;
   cursor: pointer;
-
   &:hover {
     color: #d32f2f;
   }
 `;
 
-export const ArticleModal = ({ title, abstract, onClose }) => {
+const Title = styled.h1`
+  font-size: 2vh;
+  font-weight: 600;
+  margin: 0.5em 0;
+`;
+
+const Subtitle = styled.h2`
+  font-size: 1.5vh;
+  font-weight: semi-bold;
+  margin: 0.5em 0;
+`;
+
+const Caption = styled.p`
+  font-size: 1.5vh;
+  color: gray;
+  margin: 0.5em 0;
+`;
+
+const CaptionWrapper = styled.div`
+  margin: 0.5em 0;
+  height: 75%;
+  overflow-y: auto;
+`;
+
+export const ArticleModal = ({ title, authors, keywords, abstract, onClose }) => {
   return (
     <ModalOverlay onClick={onClose}>
         <ModalWrapper>
             <ModalContent onClick={(e) => e.stopPropagation()}>
                 <CloseButton onClick={onClose}>&times;</CloseButton>
                 <TextWrapper>
-                    <h2>{title}</h2>
+                    <Title>{title}</Title>
                     <hr/>
-                    <h3>초록</h3>
-                    <p>{abstract}</p>
+                    <Subtitle>{`저자: ${authors.join(', ')}`}</Subtitle>
+                    <Subtitle>{`키워드: ${keywords.join(', ')}`}</Subtitle>
+                    <Subtitle>초록</Subtitle>
+                    <CaptionWrapper>
+                      <Caption>{abstract}</Caption>
+                    </CaptionWrapper>
                 </TextWrapper>
                 <ArticleButton onClick={()=>{}}>논문 열람하기</ArticleButton>
             </ModalContent>

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const PaperContainer = styled.div`
     padding: 16px;
     overflow-y: scroll;
+    height: 80%;
 `;
 
 export function AllLiteratures() {
