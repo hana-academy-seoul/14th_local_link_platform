@@ -1,10 +1,9 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import StreamingResponse
+from yt_dlp import YoutubeDL
+import requests
 from functions import *
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
-import pandas as pd
 
 
 class Search(BaseModel):
@@ -17,6 +16,9 @@ class SearchInfo(BaseModel):
 
 
 app = FastAPI()
+meV = {'ME5890': '',
+       'ME8160': '',
+       'ME8219': ''}
 
 
 @app.get('/paperList')
@@ -56,5 +58,22 @@ async def stream(search: Search):
         if (data in paper['titleK'] or data in paper['titleE'] or
             data in paper['author'] or data in paper['abstract'] or data in paper['id']):
             videoID = str(paper['id'])
-    if videoID: return StreamingResponse(video(videoID + '.mp4'), media_type="video/mp4")
-    else: return {'e': '영상이 읎으용'}
+
+    videoLink = meV[videoID]
+    if videoLink:
+        def video(url):
+            ydl_opts = {
+                'format': 'best',
+                'quiet': True
+            }
+            with YoutubeDL(ydl_opts) as ydl:
+                info_dict = ydl.extract_info(url, download=False)
+                video_url = info_dict.get("url")
+            response = requests.get(video_url, stream=True)
+            for chunk in response.iter_content(chunk_size=1024):
+                if chunk:
+                    yield chunk
+
+        return StreamingResponse(video(videoLink), media_type="video/mp4")
+    else:
+        return {'e': '영상이 읎으용'}
