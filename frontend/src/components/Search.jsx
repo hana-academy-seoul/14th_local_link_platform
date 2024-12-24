@@ -7,7 +7,7 @@ const Searchwrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5vh;
+    height: 5%;
     margin-top: 15px;
     padding-top: 30px;
 `;
@@ -31,7 +31,7 @@ const SearchInput = styled.input`
     flex: 1;
     border-radius: 25px;
     padding: 5px 10px;
-    font-size: 1.8vh;
+    font-size: 200%;
 `;
 
 const SearchIcon = styled(FaSearch)`
