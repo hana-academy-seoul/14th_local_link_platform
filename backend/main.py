@@ -4,6 +4,7 @@ from fastapi.responses import StreamingResponse
 from yt_dlp import YoutubeDL
 import requests
 from functions import *
+from fastapi.middleware.cors import CORSMiddleware
 
 
 class Search1(BaseModel):
@@ -20,6 +21,13 @@ meV = {'ME5890': '',
        'ME8160': '',
        'ME8219': ''}
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 모든 출처 허용
+    allow_credentials=True,
+    allow_methods=["*"],  # 모든 HTTP 메서드 허용
+    allow_headers=["*"],  # 모든 HTTP 헤더 허용
+)
 
 @app.post('/paperList')
 async def paper_list(search: Search1):
@@ -53,6 +61,7 @@ async def paper_list_all():
                 retL.append({'title': tempD['titleK'],
                              'authors': tempD['author'],
                              'keywords': tempD['keywords'],
+                             'abstract': tempD['abstract'],
                              'id': tempD['id'],
                              'type': 'study'})
             elif i == 1:
