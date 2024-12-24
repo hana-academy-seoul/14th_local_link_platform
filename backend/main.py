@@ -31,24 +31,34 @@ app.add_middleware(
 
 @app.post('/paperList')
 async def paper_list(search: Search1):
-    tempD = dict()
-    retD = dict()
-    if search.data == 'AC': retD = {'title': tempD['titleK'],
-                                    'authors': tempD['author'],
-                                    'keywords': tempD['keywords'],
-                                    'id': tempD['id'],
-                                    'type': 'study'}
-    elif search.data == 'ME': retD = {'title': tempD['titleK'],
-                                    'authors': tempD['author'],
-                                    'keywords': list(),
-                                    'id': tempD['id'],
-                                    'type': 'media'}
-    elif search.data == 'DE': retD = {'title': tempD['titleK'],
-                                    'authors': tempD['author'],
-                                    'keywords': list(),
-                                    'id': tempD['id'],
-                                    'type': 'design'}
-    return retD
+    tempD = outputInfo()
+    retL = list()
+    if search.data == 'AC':
+        for i in range(len(tempD[0])):
+            retD = {'title': tempD[0][i]['titleK'],
+                    'authors': tempD[0][i]['author'],
+                    'keywords': tempD[0][i]['keywords'],
+                    'id': tempD[0][i]['id'],
+                    'type': 'study'}
+            retL.append(retD)
+
+    elif search.data == 'ME':
+        for i in range(len(tempD[1])):
+            retD = {'title': tempD[1][i]['titleK'],
+                    'authors': tempD[1][i]['author'],
+                    'keywords': list(),
+                    'id': tempD[1][i]['id'],
+                    'type': 'study'}
+            retL.append(retD)
+    elif search.data == 'DE':
+        for i in range(len(tempD[2])):
+            retD = {'title': tempD[2][i]['titleK'],
+                    'authors': tempD[2][i]['author'],
+                    'keywords': list(),
+                    'id': tempD[2][i]['id'],
+                    'type': 'study'}
+            retL.append(retD)
+    return retL
 
 
 @app.get('/paperListAll')
