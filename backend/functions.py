@@ -2,7 +2,7 @@ def outputTitle():
     title1 = list(); title2 = list(); title3 = list(); title = (title1, title2, title3)
     tl = ['AC', 'ME', 'DE']
     for i in range(3):
-        with open('data\\{}\\note.txt'.format(tl[i]), 'r', encoding='utf-8') as f:
+        with open('data/{}/note.txt'.format(tl[i]), 'r', encoding='utf-8') as f:
             for line in f.readlines():
                 templ = line.strip('\n')
                 if templ:
@@ -17,7 +17,7 @@ def outputInfo():
     tl = ['AC', 'ME', 'DE']
 
     for i in range(3):
-        with open('data\\{}\\note.txt'.format(tl[i]), 'r', encoding='utf-8') as f:
+        with open('data/{}/note.txt'.format(tl[i]), 'r', encoding='utf-8') as f:
             for line in f.readlines():
                 templ = line.strip('\n')
                 if templ:
