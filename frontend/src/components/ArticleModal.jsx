@@ -95,8 +95,8 @@ export const ArticleModal = ({ title, authors, keywords, abstract, onClose }) =>
     <ModalOverlay onClick={onClose}>
         <ModalWrapper>
             <ModalContent onClick={(e) => e.stopPropagation()}>
-                <CloseButton onClick={onClose}>&times;</CloseButton>
                 <TextWrapper>
+                  <CloseButton onClick={onClose}>&times;</CloseButton>
                     <Title>{title}</Title>
                     <hr/>
                     <Subtitle>{`저자: ${authors.join(', ')}`}</Subtitle>
