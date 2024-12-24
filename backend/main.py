@@ -129,7 +129,7 @@ async def stream(search: Search1):
             data in paper['author'] or data in paper['abstract'] or data in paper['id']):
             videoID = str(paper['id'])
 
-    videoLink = meV[videoID]
+    videoLink = meV.get(videoID)
     if videoLink:
         def video(url):
             ydl_opts = {
