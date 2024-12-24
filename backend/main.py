@@ -32,12 +32,12 @@ async def paper_list(search: Search1):
                                     'type': 'study'}
     elif search.data == 'ME': retD = {'title': tempD['titleK'],
                                     'authors': tempD['author'],
-                                    'keywords': tempD['keywords'],
+                                    'keywords': list(),
                                     'id': tempD['id'],
                                     'type': 'media'}
     elif search.data == 'DE': retD = {'title': tempD['titleK'],
                                     'authors': tempD['author'],
-                                    'keywords': tempD['keywords'],
+                                    'keywords': list(),
                                     'id': tempD['id'],
                                     'type': 'design'}
     return retD
@@ -58,16 +58,16 @@ async def paper_list_all():
             elif i == 1:
                 retL.append({'title': tempD['titleK'],
                              'authors': tempD['author'],
-                             'keywords': tempD['keywords'],
+                             'keywords': list(),
                              'id': tempD['id'],
                              'type': 'media'})
             elif i == 2:
                 retL.append({'title': tempD['titleK'],
                              'authors': tempD['author'],
-                             'keywords': tempD['keywords'],
+                             'keywords': list(),
                              'id': tempD['id'],
                              'type': 'design'})
-
+    return retL
 
 
 @app.post('/paperInfo')
