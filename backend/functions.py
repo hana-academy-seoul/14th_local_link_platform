@@ -23,32 +23,21 @@ def outputInfo():
                 if templ:
                     tempL = templ.split(' / ')
                     if i == 0:
-                        # tempD = {
-                        #     'titleK': tempL[0],
-                        #     'titleE': tempL[1],
-                        #     'author': tempL[2].split(' · '),
-                        #     'abstract': tempL[3],
-                        #     'keywords': tempL[4].split(', '),
-                        #     'id': tempL[5]
-                        # }
                         tempD = {
-                            'title': tempL[0],
-                            'authors': tempL[2].split(' · '),
+                            'titleK': tempL[0],
+                            'titleE': tempL[1],
+                            'author': tempL[2].split(' · '),
+                            'abstract': tempL[3],
                             'keywords': tempL[4].split(', '),
                             'id': tempL[5],
                             'type': 'study'
                         }
                     else:
-                        # tempD = {
-                        #     'titleK': tempL[0],
-                        #     'titleE': tempL[1],
-                        #     'author': tempL[2].split(' · '),
-                        #     'abstract': tempL[3],
-                        #     'id': tempL[4]
-                        # }
                         tempD = {
-                            'title': tempL[0],
-                            'authors': tempL[2].split(' · '),
+                            'titleK': tempL[0],
+                            'titleE': tempL[1],
+                            'author': tempL[2].split(' · '),
+                            'abstract': tempL[3],
                             'id': tempL[4],
                             'type': 'media' if i == 1 else 'design'
                         }
