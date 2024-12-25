@@ -107,7 +107,7 @@ async def paper_info(search: Search2):
     return retL
 
 
-@app.get('/paperInfoAll')
+@app.post('/paperInfoAll')
 async def paper_info_all(search: Search1):
     retL = list()
     data = search.data
