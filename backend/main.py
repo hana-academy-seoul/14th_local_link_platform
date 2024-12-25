@@ -39,10 +39,9 @@ async def paper_get(search: Search1):
         if info[i]['id'] == paperID:
             paperTitle = info[i]['titleK']
     if paperTitle:
-        fileName = "data\\{}\\{}.pdf".format(paperType, paperTitle)
-        # return FileResponse(fileName, media_type='application/pdf', filename='{}.pdf'.format(paperTitle))
-        return [paperID, paperType, info, fileName, paperTitle]
-    else: return {'e': 'asdf'}
+        fileName = "data/{}/{}.pdf".format(paperType, paperTitle)
+        return FileResponse(fileName, media_type='application/pdf', filename='{}.pdf'.format(paperTitle))
+    else: return {'e': '이게 뭐여'}
 
 
 @app.post('/paperList')
@@ -84,41 +83,25 @@ async def paper_list_all():
     for i in range(3):
         for tempD in tempL[i]:
             if i == 0:
-                retL.append({'title': tempD['title'],
-                             'authors': tempD['authors'],
+                retL.append({'title': tempD['titleK'],
+                             'authors': tempD['author'],
                              'keywords': tempD['keywords'],
                              'id': tempD['id'],
                              'type': 'study'})
             elif i == 1:
-                retL.append({'title': tempD['title'],
-                             'authors': tempD['authors'],
+                retL.append({'title': tempD['titleK'],
+                             'authors': tempD['author'],
                              'keywords': list(),
                              'id': tempD['id'],
                              'type': 'media'})
             elif i == 2:
-                retL.append({'title': tempD['title'],
-                             'authors': tempD['authors'],
+                retL.append({'title': tempD['titleK'],
+                             'authors': tempD['author'],
                              'keywords': list(),
                              'id': tempD['id'],
                              'type': 'design'})
     return retL
 
-
-@app.post('/paperInfo')
-async def paper_info(search: Search2):
-    retL = list()
-    index = 3
-    data1 = search.data1
-    data2 = search.data2
-    if data1 == 'AC': index = 0
-    elif data1 == 'ME': index = 1
-    elif data1 == 'DE': index = 2
-    if index < 3:
-        info = outputInfo()[index]
-        for paper in info:
-            if data2 in paper['title'] or data2 in paper['authors']or data2 in paper['id']:
-                retL.append(paper)
-    return retL
 
 
 @app.post('/paperInfoAll')
@@ -126,11 +109,16 @@ async def paper_info_all(search: Search1):
     retL = list()
     data = search.data
     info = outputInfo()[0] + outputInfo()[1] + outputInfo()[2]
-
     for paper in info:
-        print(paper)
-        if data in paper['title'] or data in paper['authors'] or data in paper['id']:
-            retL.append(paper)
+        if (data in paper['titleK'] or data in paper['titleE'] or
+            data in paper['author'] or data in paper['abstract'] or data in paper['id']):
+            retL.append({
+                            'title': paper['titleK'],
+                            'authors': paper['author'],
+                            'keywords': paper['keywords'],
+                            'id': paper['id'],
+                            'type': paper['type']
+                        })
     return retL
 
 
