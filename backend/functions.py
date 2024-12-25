@@ -38,6 +38,7 @@ def outputInfo():
                             'titleE': tempL[1],
                             'author': tempL[2].split(' · '),
                             'abstract': tempL[3],
+                            'keywords': list(),
                             'id': tempL[4],
                             'type': 'media' if i == 1 else 'design'
                         }
