@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 from yt_dlp import YoutubeDL
 import requests
 from functions import *
@@ -20,14 +20,30 @@ app = FastAPI()
 meV = {'ME5890': 'https://youtu.be/ezloIx35QOY',
        'ME8160': 'https://youtu.be/6jhyfjkkk80',
        'ME8219': 'https://youtu.be/RLL6r0wPUsQ'}
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 모든 출처 허용
+    allow_origins=["*"],  # 모든 도메인 허용
     allow_credentials=True,
     allow_methods=["*"],  # 모든 HTTP 메서드 허용
     allow_headers=["*"],  # 모든 HTTP 헤더 허용
 )
+
+
+@app.post('/paperGet')
+async def paper_get(search: Search1):
+    paperID = search.data
+    paperType = paperID[:2]
+    info = outputInfo()[0] + outputInfo()[1] + outputInfo()[2]
+    paperTitle = ""
+    for i in range(len(info)):
+        if info[i]['id'] == paperID:
+            paperTitle = info[i]['titleK']
+    if paperTitle:
+        fileName = "data\\{}\\{}.pdf".format(paperType, paperTitle)
+        # return FileResponse(fileName, media_type='application/pdf', filename='{}.pdf'.format(paperTitle))
+        return [paperID, paperType, info, fileName, paperTitle]
+    else: return {'e': 'asdf'}
+
 
 @app.post('/paperList')
 async def paper_list(search: Search1):
@@ -71,7 +87,6 @@ async def paper_list_all():
                 retL.append({'title': tempD['titleK'],
                              'authors': tempD['author'],
                              'keywords': tempD['keywords'],
-                             'abstract': tempD['abstract'],
                              'id': tempD['id'],
                              'type': 'study'})
             elif i == 1:
@@ -101,8 +116,7 @@ async def paper_info(search: Search2):
     if index < 3:
         info = outputInfo()[index]
         for paper in info:
-            if (data2 in paper['titleK'] or data2 in paper['titleE'] or
-                data2 in paper['author'] or data2 in paper['abstract'] or data2 in paper['id']):
+            if data2 in paper['title'] or data2 in paper['authors']or data2 in paper['id']:
                 retL.append(paper)
     return retL
 
@@ -113,8 +127,7 @@ async def paper_info_all(search: Search1):
     data = search.data
     info = outputInfo()[0] + outputInfo()[1] + outputInfo()[2]
     for paper in info:
-        if (data in paper['titleK'] or data in paper['titleE'] or
-            data in paper['author'] or data in paper['abstract'] or data in paper['id']):
+        if data in paper['title'] or data in paper['authors'] or data in paper['id']:
             retL.append(paper)
     return retL
 
@@ -129,7 +142,7 @@ async def stream(search: Search1):
             data in paper['author'] or data in paper['abstract'] or data in paper['id']):
             videoID = str(paper['id'])
 
-    videoLink = meV.get(videoID)
+    videoLink = meV[videoID]
     if videoLink:
         def video(url):
             ydl_opts = {
