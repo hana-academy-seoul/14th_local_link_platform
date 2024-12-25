@@ -84,20 +84,20 @@ async def paper_list_all():
     for i in range(3):
         for tempD in tempL[i]:
             if i == 0:
-                retL.append({'title': tempD['titleK'],
-                             'authors': tempD['author'],
+                retL.append({'title': tempD['title'],
+                             'authors': tempD['authors'],
                              'keywords': tempD['keywords'],
                              'id': tempD['id'],
                              'type': 'study'})
             elif i == 1:
-                retL.append({'title': tempD['titleK'],
-                             'authors': tempD['author'],
+                retL.append({'title': tempD['title'],
+                             'authors': tempD['authors'],
                              'keywords': list(),
                              'id': tempD['id'],
                              'type': 'media'})
             elif i == 2:
-                retL.append({'title': tempD['titleK'],
-                             'authors': tempD['author'],
+                retL.append({'title': tempD['title'],
+                             'authors': tempD['authors'],
                              'keywords': list(),
                              'id': tempD['id'],
                              'type': 'design'})
@@ -126,7 +126,9 @@ async def paper_info_all(search: Search1):
     retL = list()
     data = search.data
     info = outputInfo()[0] + outputInfo()[1] + outputInfo()[2]
+
     for paper in info:
+        print(paper)
         if data in paper['title'] or data in paper['authors'] or data in paper['id']:
             retL.append(paper)
     return retL
