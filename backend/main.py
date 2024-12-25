@@ -55,7 +55,7 @@ async def paper_list(search: Search1):
                     'abstract': tempD[0][i]['abstract'],
                     'keywords': tempD[0][i]['keywords'],
                     'id': tempD[0][i]['id'],
-                    'type': 'study'}
+                    'type': '학술팀'}
             retL.append(retD)
 
     elif search.data == 'ME':
@@ -65,7 +65,7 @@ async def paper_list(search: Search1):
                     'abstract': tempD[1][i]['abstract'],
                     'keywords': list(),
                     'id': tempD[1][i]['id'],
-                    'type': 'study'}
+                    'type': '미디어팀'}
             retL.append(retD)
     elif search.data == 'DE':
         for i in range(len(tempD[2])):
@@ -74,7 +74,7 @@ async def paper_list(search: Search1):
                     'abstract': tempD[2][i]['abstract'],
                     'keywords': list(),
                     'id': tempD[2][i]['id'],
-                    'type': 'study'}
+                    'type': '디자인팀'}
             retL.append(retD)
     return retL
 
@@ -91,21 +91,21 @@ async def paper_list_all():
                              'abstract': tempD['abstract'],
                              'keywords': tempD['keywords'],
                              'id': tempD['id'],
-                             'type': 'study'})
+                             'type': '학술팀'})
             elif i == 1:
                 retL.append({'title': tempD['titleK'],
                              'authors': tempD['author'],
                              'abstract': tempD['abstract'],
                              'keywords': list(),
                              'id': tempD['id'],
-                             'type': 'media'})
+                             'type': '미디어팀'})
             elif i == 2:
                 retL.append({'title': tempD['titleK'],
                              'authors': tempD['author'],
                              'abstract': tempD['abstract'],
                              'keywords': list(),
                              'id': tempD['id'],
-                             'type': 'design'})
+                             'type': '디자인팀'})
     return retL
 
 
