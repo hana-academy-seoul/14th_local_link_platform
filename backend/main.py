@@ -17,9 +17,9 @@ class Search2(BaseModel):
 
 
 app = FastAPI()
-meV = {'ME5890': '',
-       'ME8160': '',
-       'ME8219': ''}
+meV = {'ME5890': 'https://youtu.be/ezloIx35QOY',
+       'ME8160': 'https://youtu.be/6jhyfjkkk80',
+       'ME8219': 'https://youtu.be/RLL6r0wPUsQ'}
 
 app.add_middleware(
     CORSMiddleware,
