@@ -52,6 +52,7 @@ async def paper_list(search: Search1):
         for i in range(len(tempD[0])):
             retD = {'title': tempD[0][i]['titleK'],
                     'authors': tempD[0][i]['author'],
+                    'abstract': tempD[0][i]['abstract'],
                     'keywords': tempD[0][i]['keywords'],
                     'id': tempD[0][i]['id'],
                     'type': 'study'}
@@ -61,6 +62,7 @@ async def paper_list(search: Search1):
         for i in range(len(tempD[1])):
             retD = {'title': tempD[1][i]['titleK'],
                     'authors': tempD[1][i]['author'],
+                    'abstract': tempD[1][i]['abstract'],
                     'keywords': list(),
                     'id': tempD[1][i]['id'],
                     'type': 'study'}
@@ -69,6 +71,7 @@ async def paper_list(search: Search1):
         for i in range(len(tempD[2])):
             retD = {'title': tempD[2][i]['titleK'],
                     'authors': tempD[2][i]['author'],
+                    'abstract': tempD[2][i]['abstract'],
                     'keywords': list(),
                     'id': tempD[2][i]['id'],
                     'type': 'study'}
@@ -85,18 +88,21 @@ async def paper_list_all():
             if i == 0:
                 retL.append({'title': tempD['titleK'],
                              'authors': tempD['author'],
+                             'abstract': tempD['abstract'],
                              'keywords': tempD['keywords'],
                              'id': tempD['id'],
                              'type': 'study'})
             elif i == 1:
                 retL.append({'title': tempD['titleK'],
                              'authors': tempD['author'],
+                             'abstract': tempD['abstract'],
                              'keywords': list(),
                              'id': tempD['id'],
                              'type': 'media'})
             elif i == 2:
                 retL.append({'title': tempD['titleK'],
                              'authors': tempD['author'],
+                             'abstract': tempD['abstract'],
                              'keywords': list(),
                              'id': tempD['id'],
                              'type': 'design'})
@@ -115,6 +121,7 @@ async def paper_info_all(search: Search1):
             retL.append({
                             'title': paper['titleK'],
                             'authors': paper['author'],
+                            'abstract': paper['abstract'],
                             'keywords': paper['keywords'],
                             'id': paper['id'],
                             'type': paper['type']
