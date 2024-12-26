@@ -124,7 +124,10 @@ async def paper_info_all(search: Search1):
                             'abstract': paper['abstract'],
                             'keywords': paper['keywords'],
                             'id': paper['id'],
-                            'type': paper['type']
+                            'type': '학술팀' if paper['type'] == 'study'
+                            else '미디어팀' if paper['type'] == 'media'
+                            else '디자인팀' if paper['type'] == 'design'
+                            else '와우 이스터에그~'
                         })
     return retL
 
