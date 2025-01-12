@@ -1,7 +1,9 @@
-import { Article } from "../../components/Article"
+import { Article } from "../components/Article"
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 
 const PaperContainer = styled.div`
     padding: 16px;
@@ -9,7 +11,8 @@ const PaperContainer = styled.div`
     height: 80%;
 `;
 
-export function StudyLiterature() {
+export function Searched() {
+    const { id } = useParams();
     const client = axios.create();
     const [initialID, setInitialID] = useState([]);
     const [articles, setArticles] = useState([]);
@@ -30,16 +33,16 @@ export function StudyLiterature() {
     }, []);
 
     useEffect(()=>{
-        client.post('https://locallink.hasclassmatching.com/paperList', {"data": "AC"})
+        client.post('https://locallink.hasclassmatching.com/paperInfoAll', {"data": id})
         .then((response) => {
-            console.log(response);
+            console.log(response.data);
             setArticles(response.data);
             setIsLoaded(true);
         })
         .catch((error) => {
             console.error(error);
         })
-    },[])
+    },[id])
 
     return (
         <PaperContainer>

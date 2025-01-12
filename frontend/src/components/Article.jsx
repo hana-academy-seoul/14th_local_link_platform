@@ -114,6 +114,7 @@ export const Article = ({ title, authors, affiliation, keywords, id, initialLike
           keywords={keywords}
           abstract={abstract}
           onClose={handleModalClose}
+          id={id}
         />
       )}
     </PaperContainer>

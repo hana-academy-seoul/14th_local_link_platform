@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaSearch, FaUser } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Searchwrapper = styled.div`
     width: 100vw;
@@ -10,6 +11,7 @@ const Searchwrapper = styled.div`
     height: 5%;
     margin-top: 15px;
     padding-top: 30px;
+    padding-bottom: 30px;
 `;
 
 const SearchContainer = styled.div`
@@ -38,6 +40,7 @@ const SearchIcon = styled(FaSearch)`
     color: #ccc;
     margin-left: 10px;
     font-size: 2vh;
+    cursor: pointer;
 `;
 
 const AccountIcon = styled(FaUser)`
@@ -49,12 +52,33 @@ const AccountIcon = styled(FaUser)`
 `;
 
 export const SearchBar = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
+
+    const handleSearch = () => {
+        if (searchTerm.trim()) {
+            navigate(`/searched/${searchTerm}`);
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     return (
         <Searchwrapper>
-            <AccountIcon />
+            <AccountIcon onClick={()=>{navigate('/likes')}}/>
             <SearchContainer>
-                <SearchInput type="text" placeholder="검색어 입력" />
-                <SearchIcon />
+                <SearchInput
+                    type="text"
+                    placeholder="검색어 입력"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                />
+                <SearchIcon onClick={handleSearch} />
             </SearchContainer>
         </Searchwrapper>
     );

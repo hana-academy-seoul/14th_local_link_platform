@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaHeart, FaBook, FaFilm, FaPaintBrush, FaHome } from "react-icons/fa";
 import styled from "styled-components";
 import { Link } from "react-router-dom"; // Link 컴포넌트 추가
+import { useLocation } from "react-router-dom";
 
 const NavbarContainer = styled.div`
   position: fixed;
@@ -44,7 +45,13 @@ const NavItem = styled.div`
 `;
 
 export const BottomNavBar = () => {
-  const [activeTab, setActiveTab] = useState("home");
+  const location = useLocation(); // 현재 URL 경로를 가져옴
+  const [activeTab, setActiveTab] = useState("");
+
+  useEffect(() => {
+    const path = location.pathname.split("/")[1]; // 경로의 첫 부분만 추출
+    setActiveTab(path || "home"); // 경로가 없으면 기본값 'home'으로 설정
+}, [location]);
 
   return (
     <NavbarContainer>

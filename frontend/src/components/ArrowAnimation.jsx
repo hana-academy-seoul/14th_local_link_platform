@@ -14,15 +14,27 @@ const moveLeft = keyframes`
   }
 `;
 
+const gradientMove = keyframes`
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
+`;
+
 // 애니메이션을 적용한 컨테이너
 const Arrow = styled.div`
   display: inline-block;
   font-size: 4vh;
-  color: #555;
-  animation: ${moveLeft} 2s infinite; /* 애니메이션 설정 */
+  color: transparent; /* 텍스트 색상 투명 */
+  background-image: linear-gradient(45deg, #a8c0ff, #3f4c81, #ff77ff, #80ff72); /* 홀로그램 느낌의 색상 */
+  background-size: 400% 400%; /* 배경 크기를 확장하여 그라데이션이 부드럽게 흐르도록 */
+  background-clip: text; /* 텍스트에 배경 그라데이션을 적용 */
+  animation: ${moveLeft} 3s infinite, ${gradientMove} 8s linear infinite; /* 애니메이션을 자연스럽게 반복 */
   position: relative;
-  top: 70vh;
-  left: 50px;
+  top: 75vh;
+  left: 20%;
 `;
 
 export function ArrowAnimation() {
